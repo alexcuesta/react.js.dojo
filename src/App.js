@@ -7,6 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loaded: false,
+      error: null,
       number: 0,
       people: []
     }
@@ -15,18 +17,27 @@ class App extends Component {
   componentWillMount() {
     fetch('http://api.open-notify.org/astros.json')
       .then(response => response.json())
-      .then(result => this.setState(result))
+      .then(result => this.setState({...this.state, loaded: true, ...result}))
+      .catch(error => this.setState({...this.state, error:true}))
   }
 
   render() {
-    const { number, people} = this.state
+    console.log("Rendering..")
+    console.log(this.state)
+    const { number, people, loaded, error} = this.state
     return (
       <div className="App">
-        <h1>How many people are in space?</h1>
-        <span>{this.state.number}</span>
-        <ul>
-          {people.map(astrounat => <li><b>{astrounat.craft}</b> - {astrounat.name}</li>)}
-        </ul>
+        {!loaded && <span>Looking at the sky!</span>}
+        {error && <span>Cannot see the sky</span>}
+        {loaded && !error &&
+        <div>
+          <h1>How many people are in space?</h1>
+          <span>{this.state.number}</span>
+          <ul>
+            {people.map(astrounat => <li><b>{astrounat.craft}</b> - {astrounat.name}</li>)}
+          </ul>
+        </div>
+        }
       </div>
     );
   }
