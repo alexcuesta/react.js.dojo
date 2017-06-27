@@ -1,3 +1,5 @@
+// Source Code https://github.com/cris7ian/react-dojo
+
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import {Astrounat} from './astrounat'
@@ -24,6 +26,7 @@ class App extends Component {
   }
 
   render() {
+    // state cannot be changed while rendering
     console.log("Rendering..")
     console.log(this.state)
     const { number, people, loaded, error} = this.state
