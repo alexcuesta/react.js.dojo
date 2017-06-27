@@ -7,13 +7,15 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      number: 3,
-      people: [
-        {craft: "ISS", name: 'Peggy Mock'},
-        {craft: "ISS", name: 'Fyodor Mock'},
-        {craft: "ISS", name: 'Jack Mock'}
-      ]
+      number: 0,
+      people: []
     }
+  }
+
+  componentWillMount() {
+    fetch('http://api.open-notify.org/astros.json')
+      .then(response => response.json())
+      .then(result => this.setState(result))
   }
 
   render() {
