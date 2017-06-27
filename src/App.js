@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import {Astrounat} from './astrounat'
 import './App.css';
+
 
 class App extends Component {
 
@@ -34,7 +36,13 @@ class App extends Component {
           <h1>How many people are in space?</h1>
           <span>{this.state.number}</span>
           <ul>
-            {people.map(astrounat => <li><b>{astrounat.craft}</b> - {astrounat.name}</li>)}
+            {people.map(astrounat => (
+              <Astrounat
+                key={astrounat.name}
+                name={astrounat.name}
+                craft={astrounat.craft}
+              />
+            ))}
           </ul>
         </div>
         }
