@@ -23,9 +23,7 @@ class App extends Component {
         <h1>How many people are in space?</h1>
         <span>{this.state.number}</span>
         <ul>
-          <li><b>{people[0].craft}</b> - {people[0].name}</li>
-          <li><b>{people[1].craft}</b> - {people[1].name}</li>
-          <li><b>{people[2].craft}</b> - {people[2].name}</li>
+          {people.map(astrounat => <li><b>{astrounat.craft}</b> - {astrounat.name}</li>)}
         </ul>
       </div>
     );
